@@ -40,7 +40,7 @@ SasukeX.UI.showShop = function(products){
 
       //exit button
       if(target.tagName == 'BUTTON') {
-        //resume journey
+        //resume game
         shopDiv.classList.add('hidden');
         SasukeX.UI.game.resumeJourney();
       }
@@ -145,7 +145,7 @@ SasukeX.UI.fight = function(){
     this.notify('Everybody died in the fight', 'negative');
   }
 
-  //resume journey
+  //resume game
   document.getElementById('attack').classList.add('hidden');
   this.game.resumeJourney();
 };
@@ -170,7 +170,7 @@ SasukeX.UI.runaway = function(){
   //remove event listener
   document.getElementById('runaway').removeEventListener('click');
 
-  //resume journey
+  //resume game
   document.getElementById('attack').classList.add('hidden');
   this.game.resumeJourney();
 

@@ -54,7 +54,7 @@ SasukeX.Game.init = function(){
   this.startJourney();
 };
 
-//start the journey and time starts running
+//start the game and time starts running
 SasukeX.Game.startJourney = function() {
   this.gameActive = true;
   this.previousTime = null;
@@ -129,12 +129,12 @@ SasukeX.Game.updateGame = function() {
   }
 };
 
-//pause the journey
+//pause the game
 SasukeX.Game.pauseJourney = function() {
   this.gameActive = false;
 };
 
-//resume the journey
+//resume the game
 SasukeX.Game.resumeJourney = function() {
   this.gameActive = true;
   this.step();
