@@ -40,30 +40,42 @@ body {
 } */
 
 #progress-area {
-  float: left;
+  /* float: left;
   position: relative;
   width: 100%;
   margin: 10px;
-  bottom: 225px;
+  bottom: 225px; */
 }
 
 #village {
   /* image-rendering: pixelated; */
-  /* position: absolute; */
+  position: absolute;
   top: 0px;
   left: 0px;
-  z-index: 1;
+  z-index: 2;
   height: 280px;
   width: 370px;
+  pointer-events: none;
 }
 
 #sasuke {
   position: absolute;
   top: 135px;
   left: 50px;
-  z-index: 2;
+  z-index: 3;
   height: 55px;
+  pointer-events: none;
 }
+
+#dialogue {
+    position: absolute;
+    z-index: 4;
+    top: 210px;
+    left: 15px;
+    pointer-events: none;
+}
+
+
 
 #stats-area {
   background-color: white;
@@ -81,14 +93,19 @@ body {
 }
 
 #updates-area {
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
   float: left;
-  width: 350px;
+  width: 285px;
   margin: 10px;
-  height: 150px;
-  padding: 10px;
+  height: 36px;
+  padding: 8px;
   font-size: 12px;
   overflow-y: scroll;
+
+  position: absolute;
+  z-index: 5;
+  top: 203px;
+  left: 15px;
 }
 
 .update-positive {
@@ -145,7 +162,7 @@ body {
 
 #ds {
     position: absolute;
-    z-index: 3;
+    z-index: 5;
     pointer-events: none;
 }
 
@@ -155,7 +172,7 @@ body {
 }
 
 #game-visual {
-    pointer-events: none;
+
 }
 
 #game {
