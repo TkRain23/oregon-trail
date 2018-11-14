@@ -21,7 +21,18 @@ body {
 
 #journey {
   height: 100%;
-  background-color: #5F9FFF;
+  background-color: gray;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #event {
@@ -31,23 +42,27 @@ body {
 #progress-area {
   float: left;
   position: relative;
-  width: 400px;
+  width: 100%;
   margin: 10px;
+  bottom: 225px;
 }
 
-#trees {
+#village {
   /* image-rendering: pixelated; */
-  position: absolute;
+  /* position: absolute; */
   top: 0px;
   left: 0px;
   z-index: 1;
+  height: 280px;
+  width: 370px;
 }
 
 #sasuke {
   position: absolute;
-  top: 150px;
+  top: 135px;
   left: 50px;
-  z-index: 3;
+  z-index: 2;
+  height: 55px;
 }
 
 #stats-area {
@@ -58,6 +73,7 @@ body {
   margin: 10px;
   padding: 10px;
   font-size: 14px;
+
 }
 
 .stat-value {
@@ -117,4 +133,32 @@ body {
   padding: 10px;
   height: 60px;
   width: 150px;
+}
+
+#log {
+    display: flex;
+    width: 370px;
+    height: 280px;
+    position: absolute;
+    bottom: 125px;
+}
+
+#ds {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+}
+
+#ds-bg {
+    margin: auto;
+    width: 50%;
+}
+
+#game-visual {
+    pointer-events: none;
+}
+
+#game {
+    margin-left:auto;
+    margin-right:auto;
 }

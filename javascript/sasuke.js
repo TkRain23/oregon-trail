@@ -1,43 +1,43 @@
-var OregonH = OregonH || {};
+var SasukeX = SasukeX || {};
 
-OregonH.Sasuke = {};
+SasukeX.Sasuke = {};
 
-OregonH.Sasuke.init = function(stats){
+SasukeX.Sasuke.init = function(stats){
   this.day = stats.day;
   this.distance = stats.distance;
   this.crew = stats.crew;
   this.food = stats.food;
-  this.oxen = stats.oxen;
-  this.money = stats.money;
-  this.firepower = stats.firepower;
+  this.tailed_beast = stats.tailed_beast;
+  this.ryō = stats.ryō;
+  this.chakra = stats.chakra;
 };
 
 //update weight and capacity
-OregonH.Sasuke.updateWeight = function(){
+SasukeX.Sasuke.updateWeight = function(){
   var droppedFood = 0;
-  var droppedGuns = 0;
+  var droppedKunai = 0;
 
   //how much can the sasuke carry
-  this.capacity = this.oxen * OregonH.WEIGHT_PER_OX + this.crew * OregonH.WEIGHT_PER_PERSON;
+  this.capacity = this.tailed_beast * SasukeX.WEIGHT_PER_TAILED_BEAST + this.crew * SasukeX.WEIGHT_PER_PERSON;
 
   //how much weight do we currently have
-  this.weight = this.food * OregonH.FOOD_WEIGHT + this.firepower * OregonH.FIREPOWER_WEIGHT;
+  this.weight = this.food * SasukeX.FOOD_WEIGHT + this.chakra * SasukeX.FIREPOWER_WEIGHT;
 
   //drop things behind if it's too much weight
   //assume guns get dropped before food
-  while(this.firepower && this.capacity <= this.weight) {
-    this.firepower--;
-    this.weight -= OregonH.FIREPOWER_WEIGHT;
-    droppedGuns++;
+  while(this.chakra && this.capacity <= this.weight) {
+    this.chakra--;
+    this.weight -= SasukeX.FIREPOWER_WEIGHT;
+    droppedKunai++;
   }
 
-  if(droppedGuns) {
-    this.ui.notify('Left '+droppedGuns+' guns behind', 'negative');
+  if(droppedKunai) {
+    this.ui.notify('Left '+droppedKunai+' kunais behind', 'negative');
   }
 
   while(this.food && this.capacity <= this.weight) {
     this.food--;
-    this.weight -= OregonH.FOOD_WEIGHT;
+    this.weight -= SasukeX.FOOD_WEIGHT;
     droppedFood++;
   }
 
@@ -47,16 +47,16 @@ OregonH.Sasuke.updateWeight = function(){
 };
 
 //update covered distance
-OregonH.Sasuke.updateDistance = function() {
+SasukeX.Sasuke.updateDistance = function() {
   //the closer to capacity, the slower
   var diff = this.capacity - this.weight;
-  var speed = OregonH.SLOW_SPEED + diff/this.capacity * OregonH.FULL_SPEED;
+  var speed = SasukeX.SLOW_SPEED + diff/this.capacity * SasukeX.FULL_SPEED;
   this.distance += speed;
 };
 
 //food consumption
-OregonH.Sasuke.consumeFood = function() {
-  this.food -= this.crew * OregonH.FOOD_PER_PERSON;
+SasukeX.Sasuke.consumeFood = function() {
+  this.food -= this.crew * SasukeX.FOOD_PER_PERSON;
 
   if(this.food < 0) {
     this.food = 0;

@@ -1,30 +1,30 @@
-var OregonH = OregonH || {};
+var SasukeX = SasukeX || {};
 
-OregonH.UI = {};
+SasukeX.UI = {};
 
 //show a notification in the message area
-OregonH.UI.notify = function(message, type){
+SasukeX.UI.notify = function(message, type){
   document.getElementById('updates-area').innerHTML = '<div class="update-' + type + '">Day '+ Math.ceil(this.sasuke.day) + ': ' + message+'</div>' + document.getElementById('updates-area').innerHTML;
 };
 
-//refresh visual sasuke stats
-OregonH.UI.refreshStats = function() {
+//refresh visual stats
+SasukeX.UI.refreshStats = function() {
   //modify the dom
   document.getElementById('stat-day').innerHTML = Math.ceil(this.sasuke.day);
   document.getElementById('stat-distance').innerHTML = Math.floor(this.sasuke.distance);
   document.getElementById('stat-crew').innerHTML = this.sasuke.crew;
-  document.getElementById('stat-oxen').innerHTML = this.sasuke.oxen;
+  document.getElementById('stat-tailed_beast').innerHTML = this.sasuke.tailed_beast;
   document.getElementById('stat-food').innerHTML = Math.ceil(this.sasuke.food);
-  document.getElementById('stat-money').innerHTML = this.sasuke.money;
-  document.getElementById('stat-firepower').innerHTML = this.sasuke.firepower;
+  document.getElementById('stat-ryō').innerHTML = this.sasuke.ryō;
+  document.getElementById('stat-chakra').innerHTML = this.sasuke.chakra;
   document.getElementById('stat-weight').innerHTML = Math.ceil(this.sasuke.weight) + '/' + this.sasuke.capacity;
 
-  //update sasuke position
-  document.getElementById('sasuke').style.left = (380 * this.sasuke.distance/OregonH.FINAL_DISTANCE) + 'px';
+  //update sasuke's crew position
+  document.getElementById('sasuke').style.left = (380 * this.sasuke.distance/SasukeX.FINAL_DISTANCE) + 'px';
 };
 
 //show shop
-OregonH.UI.showShop = function(products){
+SasukeX.UI.showShop = function(products){
 
   //get shop area
   var shopDiv = document.getElementById('shop');
@@ -42,13 +42,13 @@ OregonH.UI.showShop = function(products){
       if(target.tagName == 'BUTTON') {
         //resume journey
         shopDiv.classList.add('hidden');
-        OregonH.UI.game.resumeJourney();
+        SasukeX.UI.game.resumeJourney();
       }
       else if(target.tagName == 'DIV' && target.className.match(/product/)) {
 
         console.log('buying')
 
-        var bought = OregonH.UI.buyProduct({
+        var bought = SasukeX.UI.buyProduct({
           item: target.getAttribute('data-item'),
           qty: target.getAttribute('data-qty'),
           price: target.getAttribute('data-price')
@@ -69,48 +69,48 @@ OregonH.UI.showShop = function(products){
   var product;
   for(var i=0; i < products.length; i++) {
     product = products[i];
-    prodsDiv.innerHTML += '<div class="product" data-qty="' + product.qty + '" data-item="' + product.item + '" data-price="' + product.price + '">' + product.qty + ' ' + product.item + ' - $' + product.price + '</div>';
+    prodsDiv.innerHTML += '<div class="product" data-qty="' + product.qty + '" data-item="' + product.item + '" data-price="' + product.price + '">' + product.qty + ' ' + product.item + ' - 両' + product.price + '</div>';
   }
 
   //setup click event
-  //document.getElementsByClassName('product').addEventListener(OregonH.UI.buyProduct);
+  //document.getElementsByClassName('product').addEventListener(SasukeX.UI.buyProduct);
 };
 
 //buy product
-OregonH.UI.buyProduct = function(product) {
+SasukeX.UI.buyProduct = function(product) {
   //check we can afford it
-  if(product.price > OregonH.UI.sasuke.money) {
-    OregonH.UI.notify('Not enough money', 'negative');
+  if(product.price > SasukeX.UI.sasuke.ryō) {
+    SasukeX.UI.notify('Not enough ryō', 'negative');
     return false;
   }
 
-  OregonH.UI.sasuke.money -= product.price;
+  SasukeX.UI.sasuke.ryō -= product.price;
 
-  OregonH.UI.sasuke[product.item] += +product.qty;
+  SasukeX.UI.sasuke[product.item] += +product.qty;
 
-  OregonH.UI.notify('Bought ' + product.qty + ' x ' + product.item, 'positive');
+  SasukeX.UI.notify('Bought ' + product.qty + ' x ' + product.item, 'positive');
 
   //update weight
-  OregonH.UI.sasuke.updateWeight();
+  SasukeX.UI.sasuke.updateWeight();
 
   //update visuals
-  OregonH.UI.refreshStats();
+  SasukeX.UI.refreshStats();
 
   return true;
 
 };
 
 //show attack
-OregonH.UI.showAttack = function(firepower, gold) {
+SasukeX.UI.showAttack = function(chakra, gold) {
   var attackDiv = document.getElementById('attack');
   attackDiv.classList.remove('hidden');
 
   //keep properties
-  this.firepower = firepower;
+  this.chakra = chakra;
   this.gold = gold;
 
-  //show firepower
-  document.getElementById('attack-description').innerHTML = 'Firepower: ' + firepower;
+  //show chakra
+  document.getElementById('attack-description').innerHTML = 'Chakra: ' + chakra;
 
   //init once
   if(!this.attackInitiated) {
@@ -126,19 +126,19 @@ OregonH.UI.showAttack = function(firepower, gold) {
 };
 
 //fight
-OregonH.UI.fight = function(){
+SasukeX.UI.fight = function(){
 
-  var firepower = this.firepower;
+  var chakra = this.chakra;
   var gold = this.gold;
 
-  var damage = Math.ceil(Math.max(0, firepower * 2 * Math.random() - this.sasuke.firepower));
+  var damage = Math.ceil(Math.max(0, chakra * 2 * Math.random() - this.sasuke.chakra));
 
   //check there are survivors
   if(damage < this.sasuke.crew) {
     this.sasuke.crew -= damage;
-    this.sasuke.money += gold;
+    this.sasuke.ryō += gold;
     this.notify(damage + ' people were killed fighting', 'negative');
-    this.notify('Found $' + gold, 'gold');
+    this.notify('Found 両' + gold, 'gold');
   }
   else {
     this.sasuke.crew = 0;
@@ -151,11 +151,11 @@ OregonH.UI.fight = function(){
 };
 
 //runing away from enemy
-OregonH.UI.runaway = function(){
+SasukeX.UI.runaway = function(){
 
-  var firepower = this.firepower;
+  var chakra = this.chakra;
 
-  var damage = Math.ceil(Math.max(0, firepower * Math.random()/2));
+  var damage = Math.ceil(Math.max(0, chakra * Math.random()/2));
 
   //check there are survivors
   if(damage < this.sasuke.crew) {

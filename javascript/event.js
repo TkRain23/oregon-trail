@@ -1,63 +1,63 @@
-var OregonH = OregonH || {};
+var SasukeX = SasukeX || {};
 
-OregonH.Event = {};
+SasukeX.Event = {};
 
-OregonH.Event.eventTypes = [
+SasukeX.Event.eventTypes = [
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
     stat: 'crew',
     value: -3,
-    text: 'Food intoxication. Casualties: '
+    text: 'Attacked by Danzo. Casualties: '
   },
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
     stat: 'crew',
     value: -4,
-    text: 'Flu outbreak. Casualties: '
+    text: 'Eight-Tails Jinchūriki Appeared. Casualties: '
   },
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
     stat: 'food',
     value: -10,
-    text: 'Worm infestation. Food lost: '
+    text: 'Rations stolen by bandits. Food lost: '
   },
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
-    stat: 'money',
+    stat: 'ryō',
     value: -50,
-    text: 'Pick pockets steal $'
+    text: 'Anbu raided base. Lost 両'
   },
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
-    stat: 'oxen',
+    stat: 'tailed_beast',
     value: -1,
-    text: 'Ox flu outbreak. Casualties: '
+    text: 'Tailed Beast(s) Escapes. Lost: '
   },
   {
     type: 'STAT-CHANGE',
     notification: 'positive',
     stat: 'food',
     value: 20,
-    text: 'Found wild berries. Food added: '
+    text: 'Found chakra fruit. Food added: '
   },
   {
     type: 'STAT-CHANGE',
     notification: 'positive',
     stat: 'food',
-    value: 20,
-    text: 'Found wild berries. Food added: '
+    value: 15,
+    text: 'Found ramen shop. Food added: '
   },
   {
     type: 'STAT-CHANGE',
     notification: 'positive',
-    stat: 'oxen',
+    stat: 'tailed_beast',
     value: 1,
-    text: 'Found wild oxen. New oxen: '
+    text: 'Captured Tailed Beast. New Tailed Beast: '
   },
   {
     type: 'SHOP',
@@ -65,8 +65,8 @@ OregonH.Event.eventTypes = [
     text: 'You have found a shop',
     products: [
       {item: 'food', qty: 20, price: 50},
-      {item: 'oxen', qty: 1, price: 200},
-      {item: 'firepower', qty: 2, price: 50},
+      {item: 'tailed_beast', qty: 1, price: 200},
+      {item: 'chakra', qty: 2, price: 50},
       {item: 'crew', qty: 5, price: 80}
     ]
   },
@@ -76,8 +76,8 @@ OregonH.Event.eventTypes = [
     text: 'You have found a shop',
     products: [
       {item: 'food', qty: 30, price: 50},
-      {item: 'oxen', qty: 1, price: 200},
-      {item: 'firepower', qty: 2, price: 20},
+      {item: 'tailed_beast', qty: 1, price: 200},
+      {item: 'chakra', qty: 2, price: 20},
       {item: 'crew', qty: 10, price: 80}
     ]
   },
@@ -87,8 +87,8 @@ OregonH.Event.eventTypes = [
     text: 'Smugglers sell various goods',
     products: [
       {item: 'food', qty: 20, price: 60},
-      {item: 'oxen', qty: 1, price: 300},
-      {item: 'firepower', qty: 2, price: 80},
+      {item: 'tailed_beast', qty: 1, price: 300},
+      {item: 'chakra', qty: 2, price: 80},
       {item: 'crew', qty: 5, price: 60}
     ]
   },
@@ -109,7 +109,7 @@ OregonH.Event.eventTypes = [
   }
 ];
 
-OregonH.Event.generateEvent = function(){
+SasukeX.Event.generateEvent = function(){
   //pick random one
   var eventIndex = Math.floor(Math.random() * this.eventTypes.length);
   var eventData = this.eventTypes[eventIndex];
@@ -144,7 +144,7 @@ OregonH.Event.generateEvent = function(){
   }
 };
 
-OregonH.Event.stateChangeEvent = function(eventData) {
+SasukeX.Event.stateChangeEvent = function(eventData) {
   //can't have negative quantities
   if(eventData.value + this.sasuke[eventData.stat] >= 0) {
     this.sasuke[eventData.stat] += eventData.value;
@@ -152,7 +152,7 @@ OregonH.Event.stateChangeEvent = function(eventData) {
   }
 };
 
-OregonH.Event.shopEvent = function(eventData) {
+SasukeX.Event.shopEvent = function(eventData) {
   //number of products for sale
   var numProds = Math.ceil(Math.random() * 4);
 
@@ -178,9 +178,9 @@ OregonH.Event.shopEvent = function(eventData) {
 };
 
 //prepare an attack event
-OregonH.Event.attackEvent = function(eventData){
-  var firepower = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_FIREPOWER_AVG);
-  var gold = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_GOLD_AVG);
+SasukeX.Event.attackEvent = function(eventData){
+  var chakra = Math.round((0.7 + 0.6 * Math.random()) * SasukeX.ENEMY_FIREPOWER_AVG);
+  var gold = Math.round((0.7 + 0.6 * Math.random()) * SasukeX.ENEMY_GOLD_AVG);
 
-  this.ui.showAttack(firepower, gold);
+  this.ui.showAttack(chakra, gold);
 };

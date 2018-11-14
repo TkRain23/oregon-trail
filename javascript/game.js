@@ -1,41 +1,41 @@
-var OregonH = OregonH || {};
+var SasukeX = SasukeX || {};
 
 //constants
-OregonH.WEIGHT_PER_OX = 20;
-OregonH.WEIGHT_PER_PERSON = 2;
-OregonH.FOOD_WEIGHT = 0.6;
-OregonH.FIREPOWER_WEIGHT = 5;
-OregonH.GAME_SPEED = 800;
-OregonH.DAY_PER_STEP = 0.2;
-OregonH.FOOD_PER_PERSON = 0.02;
-OregonH.FULL_SPEED = 5;
-OregonH.SLOW_SPEED = 3;
-OregonH.FINAL_DISTANCE = 1000;
-OregonH.EVENT_PROBABILITY = 0.15;
-OregonH.ENEMY_FIREPOWER_AVG = 5;
-OregonH.ENEMY_GOLD_AVG = 50;
+SasukeX.WEIGHT_PER_TAILED_BEAST = 20;
+SasukeX.WEIGHT_PER_PERSON = 2;
+SasukeX.FOOD_WEIGHT = 0.6;
+SasukeX.FIREPOWER_WEIGHT = 5;
+SasukeX.GAME_SPEED = 800;
+SasukeX.DAY_PER_STEP = 0.2;
+SasukeX.FOOD_PER_PERSON = 0.02;
+SasukeX.FULL_SPEED = 5;
+SasukeX.SLOW_SPEED = 3;
+SasukeX.FINAL_DISTANCE = 1000;
+SasukeX.EVENT_PROBABILITY = 0.15;
+SasukeX.ENEMY_FIREPOWER_AVG = 5;
+SasukeX.ENEMY_GOLD_AVG = 50;
 
-OregonH.Game = {};
+SasukeX.Game = {};
 
 //initiate the game
-OregonH.Game.init = function(){
+SasukeX.Game.init = function(){
 
   //reference ui
-  this.ui = OregonH.UI;
+  this.ui = SasukeX.UI;
 
   //reference event manager
-  this.eventManager = OregonH.Event;
+  this.eventManager = SasukeX.Event;
 
   //setup sasuke
-  this.sasuke = OregonH.Sasuke;
+  this.sasuke = SasukeX.Sasuke;
   this.sasuke.init({
     day: 0,
     distance: 0,
     crew: 30,
     food: 80,
-    oxen: 2,
-    money: 300,
-    firepower: 2
+    tailed_beast: 2,
+    ryō: 300,
+    chakra: 2
   });
 
   //pass references
@@ -55,16 +55,16 @@ OregonH.Game.init = function(){
 };
 
 //start the journey and time starts running
-OregonH.Game.startJourney = function() {
+SasukeX.Game.startJourney = function() {
   this.gameActive = true;
   this.previousTime = null;
-  this.ui.notify('A great adventure begins', 'positive');
+  this.ui.notify('A New Mission Starts', 'positive');
 
   this.step();
 };
 
 //game loop
-OregonH.Game.step = function(timestamp) {
+SasukeX.Game.step = function(timestamp) {
 
   //starting, setup the previous time for the first time
   if(!this.previousTime){
@@ -76,7 +76,7 @@ OregonH.Game.step = function(timestamp) {
   var progress = timestamp - this.previousTime;
 
   //game update
-  if(progress >= OregonH.GAME_SPEED) {
+  if(progress >= SasukeX.GAME_SPEED) {
     this.previousTime = timestamp;
     this.updateGame();
   }
@@ -86,15 +86,15 @@ OregonH.Game.step = function(timestamp) {
 };
 
 //update game stats
-OregonH.Game.updateGame = function() {
+SasukeX.Game.updateGame = function() {
   //day update
-  this.sasuke.day += OregonH.DAY_PER_STEP;
+  this.sasuke.day += SasukeX.DAY_PER_STEP;
 
   //food consumption
   this.sasuke.consumeFood();
 
   if(this.sasuke.food === 0) {
-    this.ui.notify('Your sasuke starved to death', 'negative');
+    this.ui.notify('Sasuke and his crew starved to death', 'negative');
     this.gameActive = false;
     return;
   }
@@ -111,35 +111,35 @@ OregonH.Game.updateGame = function() {
   //check if everyone died
   if(this.sasuke.crew <= 0) {
     this.sasuke.crew = 0;
-    this.ui.notify('Everyone died', 'negative');
+    this.ui.notify('Sasuke and his team were wiped out', 'negative');
     this.gameActive = false;
     return;
   }
 
   //check win game
-  if(this.sasuke.distance >= OregonH.FINAL_DISTANCE) {
-    this.ui.notify('You have returned home!', 'positive');
+  if(this.sasuke.distance >= SasukeX.FINAL_DISTANCE) {
+    this.ui.notify('Sasuke and his team returned from the mission', 'positive');
     this.gameActive = false;
     return;
   }
 
   //random events
-  if(Math.random() <= OregonH.EVENT_PROBABILITY) {
+  if(Math.random() <= SasukeX.EVENT_PROBABILITY) {
     this.eventManager.generateEvent();
   }
 };
 
 //pause the journey
-OregonH.Game.pauseJourney = function() {
+SasukeX.Game.pauseJourney = function() {
   this.gameActive = false;
 };
 
 //resume the journey
-OregonH.Game.resumeJourney = function() {
+SasukeX.Game.resumeJourney = function() {
   this.gameActive = true;
   this.step();
 };
 
 
 //init game
-OregonH.Game.init();
+SasukeX.Game.init();

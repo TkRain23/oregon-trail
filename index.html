@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>TBD</title>
-    <link rel="stylesheet" href="css/style.css"/>
-  </head>
-  <body>
-    <div id="home"></div>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sasuke</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <!-- <img id="ds" src="images/ds-lite.png" height="1080px"/> -->
+    <div id="ds-bg">
+        <img id="ds" src="images/ds-lite.png" height="1080px"/>
+    </div>
     <div id="journey">
-      <div id="stats-area">
-        <div class="stat">Day <span id="stat-day" class="stat-value"></span></div>
-        <div class="stat">Distance <span id="stat-distance" class="stat-value"></span></div>
-        <div class="stat">Crew <span id="stat-crew" class="stat-value"></span></div>
-        <div class="stat">Oxen <span id="stat-oxen" class="stat-value"></span></div>
-        <div class="stat">Food <span id="stat-food" class="stat-value"></span></div>
-        <div class="stat">Money <span id="stat-money" class="stat-value"></span></div>
-        <div class="stat">Firepower <span id="stat-firepower" class="stat-value"></span></div>
-        <div class="stat">Weight <span id="stat-weight" class="stat-value"></span><span id="stat-capacity" class="stat-value"></span></div>
-      </div>
-      <div class="updates-area" id="updates-area"></div>
-      <div id="shop" class="hidden">
-        <div id="prods">
-        </div>
-        <button>Leave shop</button>
-      </div>
-      <div id="attack" class="hidden">
-        <div id="attack-description"></div>
-        <button id="fight">Fight</button>
-        <button id="runaway">Run away</button>
-      </div>
-      <div id="progress-area">
-        <img id="sasuke" src="images/sasuke.gif" height="100px"/>
-        <img id="trees" src="images/sand_village.png" />
-      </div>
+        <!-- <div id="header">
+            <h1>Mission: Destroy Konoha</h1>
+        </div> -->
+            <div id="game-visual">
+                <div id="progress-area">
+                    <img id="sasuke" src="images/sasuke.gif" height="100px" />
+                    <img id="village" src="images/sand_village.png" />
+                </div>
+            </div>
+            <div id="log">
+                <div id="stats-area">
+                    <div class="stat">Day <span id="stat-day" class="stat-value"></span></div>
+                    <div class="stat">Distance <span id="stat-distance" class="stat-value"></span></div>
+                    <div class="stat">Crew <span id="stat-crew" class="stat-value"></span></div>
+                    <div class="stat">Tailed Beast <span id="stat-tailed_beast" class="stat-value"></span></div>
+                    <div class="stat">Food <span id="stat-food" class="stat-value"></span></div>
+                    <div class="stat">Ryō <span id="stat-ryō" class="stat-value"></span></div>
+                    <div class="stat">Chakra <span id="stat-chakra" class="stat-value"></span></div>
+                    <div class="stat">Weight <span id="stat-weight" class="stat-value"></span><span id="stat-capacity" class="stat-value"></span></div>
+                </div>
+                <div class="updates-area" id="updates-area"></div>
+                <div id="shop" class="hidden">
+                    <div id="prods">
+                    </div>
+                    <button>Leave Shop</button>
+                </div>
+                <div id="attack" class="hidden">
+                    <div id="attack-description"></div>
+                    <button id="fight">Fight</button>
+                    <button id="runaway">Run Away</button>
+                </div>
+            </div>
     </div>
 
     <div id="event"></div>
@@ -41,5 +53,6 @@
     <script src="javascript/Sasuke.js"></script>
     <script src="javascript/UI.js"></script>
     <script src="javascript/Game.js"></script>
-  </body>
+</body>
+
 </html>
