@@ -26,9 +26,9 @@ OregonH.Game.init = function(){
   //reference event manager
   this.eventManager = OregonH.Event;
 
-  //setup caravan
-  this.caravan = OregonH.Caravan;
-  this.caravan.init({
+  //setup sasuke
+  this.sasuke = OregonH.Sasuke;
+  this.sasuke.init({
     day: 0,
     distance: 0,
     crew: 30,
@@ -39,15 +39,15 @@ OregonH.Game.init = function(){
   });
 
   //pass references
-  this.caravan.ui = this.ui;
-  this.caravan.eventManager = this.eventManager;
+  this.sasuke.ui = this.ui;
+  this.sasuke.eventManager = this.eventManager;
 
   this.ui.game = this;
-  this.ui.caravan = this.caravan;
+  this.ui.sasuke = this.sasuke;
   this.ui.eventManager = this.eventManager;
 
   this.eventManager.game = this;
-  this.eventManager.caravan = this.caravan;
+  this.eventManager.sasuke = this.sasuke;
   this.eventManager.ui = this.ui;
 
   //begin adventure!
@@ -88,44 +88,45 @@ OregonH.Game.step = function(timestamp) {
 //update game stats
 OregonH.Game.updateGame = function() {
   //day update
-  this.caravan.day += OregonH.DAY_PER_STEP;
+  this.sasuke.day += OregonH.DAY_PER_STEP;
 
   //food consumption
-  this.caravan.consumeFood();
+  this.sasuke.consumeFood();
 
-  //game over no food
-  if(this.caravan.food === 0) {
-    this.ui.notify('Your caravan starved to death', 'negative');
+  if(this.sasuke.food === 0) {
+    this.ui.notify('Your sasuke starved to death', 'negative');
     this.gameActive = false;
     return;
   }
 
   //update weight
-  this.caravan.updateWeight();
+  this.sasuke.updateWeight();
 
   //update progress
-  this.caravan.updateDistance();
+  this.sasuke.updateDistance();
 
   //show stats
   this.ui.refreshStats();
 
   //check if everyone died
-  if(this.caravan.crew <= 0) {
-    this.caravan.crew = 0;
+  if(this.sasuke.crew <= 0) {
+    this.sasuke.crew = 0;
     this.ui.notify('Everyone died', 'negative');
     this.gameActive = false;
     return;
   }
 
   //check win game
-  if(this.caravan.distance >= OregonH.FINAL_DISTANCE) {
+  if(this.sasuke.distance >= OregonH.FINAL_DISTANCE) {
     this.ui.notify('You have returned home!', 'positive');
     this.gameActive = false;
     return;
   }
 
-  //random events logic will go here..
-
+  //random events
+  if(Math.random() <= OregonH.EVENT_PROBABILITY) {
+    this.eventManager.generateEvent();
+  }
 };
 
 //pause the journey
