@@ -1,62 +1,56 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="styles.css">
+        <title>Konoha Escape</title>
+    </head>
+    <body>
+        <div id="home"></div>
+        <div id="journey">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sasuke</title>
-    <link rel="stylesheet" href="css/styles.css" />
-</head>
-
-<body>
-    <!-- <img id="ds" src="images/ds-lite.png" height="1080px"/> -->
-    <div id="ds-bg">
-        <img id="ds" src="images/ds-lite.png" height="1080px"/>
-    </div>
-    <div id="game">
-        <!-- <div id="header">
-            <h1>Mission: Destroy Konoha</h1>
-        </div> -->
-            <div id="game-visual">
-                <div id="progress-area">
-                    <img id="sasuke" src="images/sasuke.gif" height="100px" />
-                    <img id="village" src="images/sand_village.png" />
-                    <img id="dialogue" src="images/dialogue.png" height="60px"/>
-                    <div class="updates-area" id="updates-area"></div>
-                </div>
-            </div>
-            <div id="log">
+            <div id="game-visual-bottom">
                 <div id="stats-area">
                     <div class="stat">Day <span id="stat-day" class="stat-value"></span></div>
                     <div class="stat">Distance <span id="stat-distance" class="stat-value"></span></div>
                     <div class="stat">Crew <span id="stat-crew" class="stat-value"></span></div>
-                    <div class="stat">Tailed Beast <span id="stat-tailed_beast" class="stat-value"></span></div>
+                    <div class="stat">Tailedbeast <span id="stat-tailedbeast" class="stat-value"></span></div>
                     <div class="stat">Food <span id="stat-food" class="stat-value"></span></div>
-                    <div class="stat">Ryō <span id="stat-ryō" class="stat-value"></span></div>
+                    <div class="stat">Ryo <span id="stat-ryo" class="stat-value"></span></div>
                     <div class="stat">Chakra <span id="stat-chakra" class="stat-value"></span></div>
                     <div class="stat">Weight <span id="stat-weight" class="stat-value"></span><span id="stat-capacity" class="stat-value"></span></div>
                 </div>
-                <!-- <div class="updates-area" id="updates-area"> OLD POSITION</div> -->
-                <!-- <div id="shop" class="hidden"> -->
-                <div id="shop">
+                <div class="updates-area" id="updates-area"></div>
+                <div id="shop" class="hidden">
                     <div id="prods">
                     </div>
-                    <button>Leave Shop</button>
+                    <button>Leave shop</button>
                 </div>
-                <!-- <div id="attack" class="hidden"> -->
-                <div id="attack">
+                <div id="attack" class="hidden">
                     <div id="attack-description"></div>
                     <button id="fight">Fight</button>
-                    <button id="runaway">Run Away</button>
+                    <button id="runaway">Run away</button>
                 </div>
             </div>
-    </div>
 
-    <!-- <div id="event"></div> -->
-    <script src="javascript/Event.js"></script>
-    <script src="javascript/Sasuke.js"></script>
-    <script src="javascript/UI.js"></script>
-    <script src="javascript/Game.js"></script>
-</body>
 
+            <div id="game-visual-top">
+                <div id="progress-area">
+                    <img id="sasuke" src="images/sasuke.gif" />
+                    <img id="sand_village" src="images/sand_village.png" />
+                    <img id="dialogue" src="images/dialogue.png" height="60px"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="event"></div>
+
+        <script src="js/events.js"></script>
+        <script src="js/controller.js"></script>
+        <script src="js/ui.js"></script>
+        <script src="js/sasuke.js"></script>
+        <script src="app.js"></script>
+    </body>
 </html>

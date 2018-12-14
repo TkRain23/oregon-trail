@@ -1,8 +1,4 @@
-var SasukeX = SasukeX || {};
-
-SasukeX.Event = {};
-
-SasukeX.Event.eventTypes = [
+eventTypes = [
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
@@ -109,78 +105,78 @@ SasukeX.Event.eventTypes = [
   }
 ];
 
-SasukeX.Event.generateEvent = function(){
-  //pick random one
-  var eventIndex = Math.floor(Math.random() * this.eventTypes.length);
-  var eventData = this.eventTypes[eventIndex];
-
-  //events that consist in updating a stat
-  if(eventData.type == 'STAT-CHANGE') {
-    this.stateChangeEvent(eventData);
-  }
-
-  //shops
-  else if(eventData.type == 'SHOP') {
-    //pause game
-    this.game.pauseJourney();
-
-    //notify user
-    this.ui.notify(eventData.text, eventData.notification);
-
-    //prepare event
-    this.shopEvent(eventData);
-  }
-
-  //attacks
-  else if(eventData.type == 'ATTACK') {
-    //pause game
-    this.game.pauseJourney();
-
-    //notify user
-    this.ui.notify(eventData.text, eventData.notification);
-
-    //prepare event
-    this.attackEvent(eventData);
-  }
-};
-
-SasukeX.Event.stateChangeEvent = function(eventData) {
-  //can't have negative quantities
-  if(eventData.value + this.sasuke[eventData.stat] >= 0) {
-    this.sasuke[eventData.stat] += eventData.value;
-    this.ui.notify(eventData.text + Math.abs(eventData.value), eventData.notification);
-  }
-};
-
-SasukeX.Event.shopEvent = function(eventData) {
-  //number of products for sale
-  var numProds = Math.ceil(Math.random() * 4);
-
-  //product list
-  var products = [];
-  var j, priceFactor;
-
-  for(var i = 0; i < numProds; i++) {
-    //random product
-    j = Math.floor(Math.random() * eventData.products.length);
-
-    //multiply price by random factor +-30%
-    priceFactor = 0.7 + 0.6 * Math.random();
-
-    products.push({
-      item: eventData.products[j].item,
-      qty: eventData.products[j].qty,
-      price: Math.round(eventData.products[j].price * priceFactor)
-    });
-  }
-
-  this.ui.showShop(products);
-};
-
-//prepare an attack event
-SasukeX.Event.attackEvent = function(eventData){
-  var chakra = Math.round((0.7 + 0.6 * Math.random()) * SasukeX.ENEMY_FIREPOWER_AVG);
-  var gold = Math.round((0.7 + 0.6 * Math.random()) * SasukeX.ENEMY_GOLD_AVG);
-
-  this.ui.showAttack(chakra, gold);
-};
+// SasukeX.Event.generateEvent = function(){
+//   //pick random one
+//   var eventIndex = Math.floor(Math.random() * this.eventTypes.length);
+//   var eventData = this.eventTypes[eventIndex];
+//
+//   //events that consist in updating a stat
+//   if(eventData.type == 'STAT-CHANGE') {
+//     this.stateChangeEvent(eventData);
+//   }
+//
+//   //shops
+//   else if(eventData.type == 'SHOP') {
+//     //pause game
+//     this.game.pauseJourney();
+//
+//     //notify user
+//     this.ui.notify(eventData.text, eventData.notification);
+//
+//     //prepare event
+//     this.shopEvent(eventData);
+//   }
+//
+//   //attacks
+//   else if(eventData.type == 'ATTACK') {
+//     //pause game
+//     this.game.pauseJourney();
+//
+//     //notify user
+//     this.ui.notify(eventData.text, eventData.notification);
+//
+//     //prepare event
+//     this.attackEvent(eventData);
+//   }
+// };
+//
+// SasukeX.Event.stateChangeEvent = function(eventData) {
+//   //can't have negative quantities
+//   if(eventData.value + this.sasuke[eventData.stat] >= 0) {
+//     this.sasuke[eventData.stat] += eventData.value;
+//     this.ui.notify(eventData.text + Math.abs(eventData.value), eventData.notification);
+//   }
+// };
+//
+// SasukeX.Event.shopEvent = function(eventData) {
+//   //number of products for sale
+//   var numProds = Math.ceil(Math.random() * 4);
+//
+//   //product list
+//   var products = [];
+//   var j, priceFactor;
+//
+//   for(var i = 0; i < numProds; i++) {
+//     //random product
+//     j = Math.floor(Math.random() * eventData.products.length);
+//
+//     //multiply price by random factor +-30%
+//     priceFactor = 0.7 + 0.6 * Math.random();
+//
+//     products.push({
+//       item: eventData.products[j].item,
+//       qty: eventData.products[j].qty,
+//       price: Math.round(eventData.products[j].price * priceFactor)
+//     });
+//   }
+//
+//   this.ui.showShop(products);
+// };
+//
+// //prepare an attack event
+// SasukeX.Event.attackEvent = function(eventData){
+//   var chakra = Math.round((0.7 + 0.6 * Math.random()) * SasukeX.ENEMY_FIREPOWER_AVG);
+//   var ryō = Math.round((0.7 + 0.6 * Math.random()) * SasukeX.ENEMY_ryō_AVG);
+//
+//   this.ui.showAttack(chakra, ryō);
+// };
